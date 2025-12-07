@@ -70,16 +70,20 @@ function setPlayerAnimation(player, animation, immediate = false) {
 
 // Helper function to set monster sprite animation
 function setMonsterAnimation(animation, immediate = false) {
-  // Remove all classes first
-  monsterSprite.className = '';
+  // For hurt animation, force the background image to ensure it shows
+  if (animation === 'hurt') {
+    monsterSprite.style.backgroundImage = "url('./assets/boks/spritetree hurt.gif')";
+    monsterSprite.className = 'monster hurt';
+    void monsterSprite.offsetWidth;
+    void monsterSprite.offsetHeight;
+    return;
+  }
   
-  // Force reflow
+  // Clear inline style for other animations
+  monsterSprite.style.backgroundImage = '';
+  monsterSprite.className = 'monster';
   void monsterSprite.offsetWidth;
-  
-  // Apply new classes immediately
   monsterSprite.className = `monster ${animation}`;
-  
-  // Force another reflow to ensure animation restarts
   void monsterSprite.offsetWidth;
   void monsterSprite.offsetHeight;
 }
@@ -335,10 +339,10 @@ function checkBothPlayers() {
     setTimeout(() => {
       hitSound.currentTime = 0;
       hitSound.play().catch(e => {});
-      // Monster hit animation - randomly choose left or right
-      monsterState = Math.random() < 0.5 ? 'leftHit' : 'rightHit';
-      setMonsterAnimation(monsterState, true);
-      console.log('Monster animation:', monsterState);
+      // Monster hurt animation
+      monsterState = 'hurt';
+      setMonsterAnimation('hurt', true);
+      console.log('Monster animation: hurt');
       
       // Keep all animations visible, then reset after monster injury animation
       setTimeout(() => { 

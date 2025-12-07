@@ -220,6 +220,9 @@
 .monster.idle {
     background-image: url('./assets/boks/spritetree idle.gif');
 }
+.monster.hurt {
+    background-image: url('./assets/boks/spritetree hurt.gif');
+}
 .monster.leftHit {
     background-image: url('./assets/boks/spritetree lefthit.gif');
 }
