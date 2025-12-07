@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎸 Harmonic Flight - The Way of Harmony</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dino-game.css" />
+  <script src="global-leaderboard.js"></script>
+</head>
+<body>
+  <div class="game-wrapper">
+    <div class="header">
+      <h1>🎸 Harmonic Flight</h1>
+      <a class="settings-btn" href="index.html">🏠 Main Menu</a>
+    </div>
+
+    <div id="dinoGame" class="game-container">
+      <h2 style="margin-bottom:15px; text-align:center; color:#fff; font-family:'Press Start 2P', monospace; text-shadow: 0 0 10px rgba(255,0,110,0.8);">Harmony vs Disharmony</h2>
+      
+      <div class="info-panel" style="margin-bottom:15px;">
+        <div class="info-card">
+          <div class="info-label">Score</div>
+          <div class="info-value" id="score">0</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">High Score</div>
+          <div class="info-value" id="highScore">0</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Mode</div>
+          <div class="info-value" id="currentMode">--</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Obstacles</div>
+          <div class="info-value" id="obstacleCount">0</div>
+        </div>
+      </div>
+
+      <div style="position: relative; width: 800px; margin: 0 auto;">
+        <canvas id="dinoCanvas" width="800" height="400"></canvas>
+        <div id="dinoSprites"></div>
+        <div id="obstacleSprites"></div>
+      </div>
+      
+      <div class="legend" style="margin-top:15px;">
+        <h3>🎮 How to Play</h3>
+        <div class="mode-description">
+          <p><strong>🟢 Harmony Mode (50%):</strong> Both guitars need the SAME action. Green indicators.</p>
+          <p><strong>🔴 Disharmony Mode (50%):</strong> Guitars need OPPOSITE actions. Red indicators.</p>
+          <p><strong>Controls:</strong> Top Guitar: W (jump) / S (crouch) | Bottom Guitar: ↑ (jump) / ↓ (crouch)</p>
+          <p><strong>Goal:</strong> Keep both guitars alive! Hit SPACE to start.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="dino-game.js"></script>
+</body>
+</html>

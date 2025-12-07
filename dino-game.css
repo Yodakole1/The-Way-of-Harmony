@@ -1,0 +1,105 @@
+/* Dino Game Specific Styles */
+
+#dinoCanvas {
+    position: relative;
+    z-index: 1;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+#dinoSprites, #obstacleSprites {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Dino sprites */
+.dino {
+    position: absolute;
+    width: 60px;
+    height: 70px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Top dino (green) */
+.dino-top {
+    background-image: url('./assets/dino/gitaraidle.gif');
+}
+
+.dino-top.jumping {
+    background-image: url('./assets/dino/gitaraidle.gif');
+}
+
+.dino-top.crouching {
+    background-image: url('./assets/dino/gitaraspustena.gif');
+}
+
+/* Bottom dino (blue) */
+.dino-bottom {
+    background-image: url('./assets/dino/saksofonidle.gif');
+}
+
+.dino-bottom.jumping {
+    background-image: url('./assets/dino/saksofonidle.gif');
+}
+
+.dino-bottom.crouching {
+    background-image: url('./assets/dino/saksofonspusten.gif');
+}
+
+/* Obstacle sprites */
+.obstacle {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Ground obstacles (preskok) */
+.obstacle-ground {
+    width: 40px;
+    height: 50px;
+}
+
+.obstacle-ground.type1 {
+    background-image: url('./assets/dino/preskok.gif');
+}
+
+.obstacle-ground.type2 {
+    background-image: url('./assets/dino/preskok2.gif');
+}
+
+.obstacle-ground.type3 {
+    background-image: url('./assets/dino/preskok3.gif');
+}
+
+/* Flying obstacles (nota) */
+.obstacle-flying {
+    width: 50px;
+    height: 50px;
+}
+
+.obstacle-flying.type1 {
+    background-image: url('./assets/dino/nota1.gif');
+}
+
+.obstacle-flying.type2 {
+    background-image: url('./assets/dino/nota2.gif');
+}
+
+.obstacle-flying.type3 {
+    background-image: url('./assets/dino/nota3.gif');
+}
+
+.obstacle-flying.type4 {
+    background-image: url('./assets/dino/nota4.gif');
+}

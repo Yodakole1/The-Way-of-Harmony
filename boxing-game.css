@@ -1,0 +1,337 @@
+/* Boxing Game Specific Styles */
+
+#boxingCanvas {
+    position: relative;
+    z-index: 1;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.player {
+    width: 240px;
+    height: 280px;
+    position: absolute;
+    bottom: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: none;
+    z-index: 5;
+    pointer-events: none;
+    
+    /* Advanced rendering optimizations */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    
+    /* GPU acceleration */
+    will-change: background-image, transform;
+    backface-visibility: hidden;
+    transform: translateZ(0) translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) translate3d(0, 0, 0);
+    
+    /* Smooth rendering */
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Force hardware acceleration and prevent flickering */
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+.player1 {
+    left: 50px;
+    background-image: url('./assets/boks/sprajt idle.gif');
+}
+
+.player2 {
+    right: 50px;
+    background-image: url('./assets/boks/sprajt idle kontra.gif');
+}
+
+/* Ensure all animations always reload */
+.player1.skin1.idle,
+.player1.skin2.idle,
+.player2.skin1.idle,
+.player2.skin2.idle,
+.player1.skin1.highkick,
+.player1.skin2.highkick,
+.player2.skin1.highkick,
+.player2.skin2.highkick,
+.player1.skin1.lowkick,
+.player1.skin2.lowkick,
+.player2.skin1.lowkick,
+.player2.skin2.lowkick,
+.player1.skin1.leftPunch,
+.player1.skin2.leftPunch,
+.player2.skin1.leftPunch,
+.player2.skin2.leftPunch,
+.player1.skin1.rightPunch,
+.player1.skin2.rightPunch,
+.player2.skin1.rightPunch,
+.player2.skin2.rightPunch,
+.player1.skin1.gotHit,
+.player1.skin2.gotHit,
+.player2.skin1.gotHit,
+.player2.skin2.gotHit {
+    animation: none;
+    background-repeat: no-repeat;
+}
+
+/* Player 1 animations - Skin 1 (left side) */
+.player1.skin1.idle {
+    background-image: url('./assets/boks/sprajt idle.gif');
+}
+.player1.skin1.highkick {
+    background-image: url('./assets/boks/sprite highkick.gif');
+}
+.player1.skin1.lowkick {
+    background-image: url('./assets/boks/sprite lowkick.gif');
+}
+.player1.skin1.leftPunch {
+    background-image: url('./assets/boks/sprajt left.gif');
+}
+.player1.skin1.rightPunch {
+    background-image: url('./assets/boks/sprajt right.gif');
+}
+.player1.skin1.gotHit {
+    background-image: url('./assets/boks/sprajt got_hit.gif');
+}
+
+/* Player 1 animations - Skin 2 (left side) */
+.player1.skin2.idle {
+    background-image: url('./assets/boks/sprajt idle2.gif');
+}
+.player1.skin2.highkick {
+    background-image: url('./assets/boks/sprite highkick2.gif');
+    animation: forceReload 0.001s;
+}
+.player1.skin2.lowkick {
+    background-image: url('./assets/boks/sprite lowkick2.gif');
+    animation: forceReload 0.001s;
+}
+.player1.skin2.leftPunch {
+    background-image: url('./assets/boks/sprajt left2.gif');
+    animation: forceReload 0.001s;
+}
+.player1.skin2.rightPunch {
+    background-image: url('./assets/boks/sprajt right2.gif');
+    animation: forceReload 0.001s;
+}
+.player1.skin2.gotHit {
+    background-image: url('./assets/boks/sprajt2 got_hit.gif');
+    animation: forceReload 0.001s;
+}
+
+/* Player 2 animations - Skin 1 (right side - kontra versions) */
+.player2.skin1.idle {
+    background-image: url('./assets/boks/sprajt idle kontra.gif');
+}
+.player2.skin1.highkick {
+    background-image: url('./assets/boks/sprite highkick kontra.gif');
+}
+.player2.skin1.lowkick {
+    background-image: url('./assets/boks/sprite lowkick kontra.gif');
+}
+.player2.skin1.leftPunch {
+    background-image: url('./assets/boks/sprajt left kontra.gif');
+}
+.player2.skin1.rightPunch {
+    background-image: url('./assets/boks/sprajt right kontra.gif');
+}
+.player2.skin1.gotHit {
+    background-image: url('./assets/boks/sprajt got_hit kontra.gif');
+}
+
+/* Player 2 animations - Skin 2 (right side - kontra versions) */
+.player2.skin2.idle {
+    background-image: url('./assets/boks/sprajt idle2 kontra.gif');
+}
+.player2.skin2.highkick {
+    background-image: url('./assets/boks/sprite highkick2 kontra.gif');
+    animation: forceReload 0.001s;
+}
+.player2.skin2.lowkick {
+    background-image: url('./assets/boks/sprite lowkick2 kontra.gif');
+    animation: forceReload 0.001s;
+}
+.player2.skin2.leftPunch {
+    background-image: url('./assets/boks/sprajt left2 kontra.gif');
+    animation: forceReload 0.001s;
+}
+.player2.skin2.rightPunch {
+    background-image: url('./assets/boks/sprajt right2 kontra.gif');
+    animation: forceReload 0.001s;
+}
+.player2.skin2.gotHit {
+    background-image: url('./assets/boks/sprajt2 got_hit kontra.gif');
+    animation: forceReload 0.001s;
+}
+
+@keyframes forceReload {
+    from { opacity: 0.9999; }
+    to { opacity: 1; }
+}
+
+.monster {
+    width: 350px;
+    height: 390px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(0) translate3d(0, 0, 0);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-image: url('./assets/boks/spritetree idle.gif');
+    z-index: 5;
+    pointer-events: none;
+    
+    /* Advanced rendering optimizations */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    
+    /* GPU acceleration */
+    backface-visibility: hidden;
+    will-change: background-image, transform;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateZ(0) translate3d(0, 0, 0);
+    
+    /* Smooth rendering */
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Force hardware acceleration and prevent flickering */
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+/* Monster animations */
+.monster.idle {
+    background-image: url('./assets/boks/spritetree idle.gif');
+}
+.monster.leftHit {
+    background-image: url('./assets/boks/spritetree lefthit.gif');
+}
+.monster.rightHit {
+    background-image: url('./assets/boks/spritetree righthit.gif');
+}
+.monster.death {
+    background-image: url('./assets/boks/spritetre dead.gif');
+}
+.monster.laugh {
+    background-image: url('./assets/boks/spritetree laugh.gif');
+}
+
+/* Canvas wrapper for positioning */
+.game-canvas-wrapper {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+/* Game overlay for start/pause/game over screens */
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Character selection */
+.character-preview {
+    padding: 20px;
+    border: 3px solid rgba(131,56,236,0.5);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: linear-gradient(135deg, rgba(26,26,46,0.8) 0%, rgba(15,15,30,0.9) 100%);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 0 2px rgba(255,0,110,0.3),
+        0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.character-preview:hover {
+    border-color: rgba(76, 175, 80, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 0 0 2px rgba(76, 175, 80, 0.6),
+        0 6px 0 rgba(0,0,0,0.4),
+        0 0 30px rgba(76, 175, 80, 0.5);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(15,15,30,0.9) 100%);
+}
+
+.character-preview.active {
+    border-color: #4caf50;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.35) 0%, rgba(15,15,30,0.9) 100%);
+    box-shadow: 
+        0 0 0 3px rgba(76, 175, 80, 0.8),
+        0 0 40px rgba(76, 175, 80, 0.7);
+    transform: scale(1.05);
+}
+
+.character-preview p {
+    margin-top: 12px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255,0,110,0.6);
+}
+
+.character-preview.active p {
+    color: #ffffff;
+    text-shadow: 
+        0 0 15px rgba(76, 175, 80, 0.8),
+        0 0 25px rgba(76, 175, 80, 0.5);
+}
+
+.character-preview img {
+    border-radius: 8px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.character-preview:hover img {
+    filter: drop-shadow(0 6px 12px rgba(76, 175, 80, 0.4));
+}
+
+#boxingSetup .setting-section h3 {
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-shadow: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#boxingSetup h2 {
+    color: #000000;
+    font-size: 36px;
+    margin-bottom: 35px;
+    text-shadow: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+}

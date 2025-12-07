@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐍 Snake Battle - The Way of Harmony</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="snake-game.css" />
+  <script src="global-leaderboard.js"></script>
+</head>
+<body>
+  <div class="game-wrapper">
+    <div class="header">
+      <h1>🐍 Snake Battle</h1>
+      <a class="settings-btn" href="index.html">🏠 Main Menu</a>
+    </div>
+
+    <div id="versusCrazy" class="game-container">
+      <h2 style="margin-bottom:10px; color:#fff; font-family:'Press Start 2P', monospace; text-shadow: 0 0 10px rgba(255,0,110,0.8);">⚡ Disharmony Battle</h2>
+      <div style="display:flex; gap:30px; justify-content:center; margin-bottom:15px;">
+        <div style="text-align:center;">
+          <h3 style="color:#4caf50; margin-bottom:10px; font-family:'Press Start 2P', monospace; font-size:14px; text-shadow: 0 0 10px rgba(76,175,80,0.8);" id="cP1Name">Player 1</h3>
+          <div class="info-panel" style="grid-template-columns: repeat(2, 1fr); max-width:300px;">
+            <div class="info-card"><div class="info-label">Score</div><div class="info-value" id="cP1Score">0</div></div>
+            <div class="info-card"><div class="info-label">Wins</div><div class="info-value" id="cP1Wins">0</div></div>
+          </div>
+          <div class="secondary-info" style="margin-top:10px; justify-content:center;">
+            <div class="info-badge"><span class="badge-label">Controls:</span><span class="badge-value">W/A/S/D</span></div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <h3 style="color:#2196F3; margin-bottom:10px; font-family:'Press Start 2P', monospace; font-size:14px; text-shadow: 0 0 10px rgba(33,150,243,0.8);" id="cP2Name">Player 2</h3>
+          <div class="info-panel" style="grid-template-columns: repeat(2, 1fr); max-width:300px;">
+            <div class="info-card"><div class="info-label">Score</div><div class="info-value" id="cP2Score">0</div></div>
+            <div class="info-card"><div class="info-label">Wins</div><div class="info-value" id="cP2Wins">0</div></div>
+          </div>
+          <div class="secondary-info" style="margin-top:10px; justify-content:center;">
+            <div class="info-badge"><span class="badge-label">Controls:</span><span class="badge-value">Arrows</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="snake-canvas-wrapper">
+        <canvas id="crazyCanvas" width="480" height="480"></canvas>
+        <div id="snakeSprites"></div>
+      </div>
+      <div class="legend" style="margin-top:15px;">
+        <h3>🎮 How to Play</h3>
+        <div class="mode-description">
+          <p><strong>Disharmony:</strong> Compete against each other! Collision with opponent = defeat.</p>
+          <p><strong>Controls:</strong> Player 1 uses W/A/S/D, Player 2 uses Arrow Keys</p>
+          <p><strong>Goal:</strong> Survive longer and eat more food than your opponent!</p>
+          <p style="text-align:center; margin-top:10px;">Press SPACE to start</p>
+        </div>
+        <button class="close-btn" id="rematchCrazy">🔁 Rematch</button>
+      </div>
+    </div>
+
+    <div id="versusSetup" class="settings-menu hidden">
+      <div class="menu-content">
+        <h2>👥 Setup 1v1</h2>
+        <div class="setting-section">
+          <h3>Player Names</h3>
+          <div style="display:grid; gap:10px; grid-template-columns: 1fr;">
+            <input id="nameP1" class="text-input" placeholder="Player 1 (default)" />
+            <input id="nameP2" class="text-input" placeholder="Player 2 (default)" />
+          </div>
+        </div>
+        <div class="setting-section">
+          <h3>🎨 Player 1 Color</h3>
+          <div class="color-buttons" id="p1Colors">
+            <button class="color-btn green" onclick="setVersusColor('p1','green')">🟢 Green</button>
+            <button class="color-btn blue" onclick="setVersusColor('p1','blue')">🔵 Blue</button>
+            <button class="color-btn red" onclick="setVersusColor('p1','red')">🔴 Red</button>
+            <button class="color-btn yellow" onclick="setVersusColor('p1','yellow')">🟡 Yellow</button>
+          </div>
+        </div>
+        <div class="setting-section">
+          <h3>🎨 Player 2 Color</h3>
+          <div class="color-buttons" id="p2Colors">
+            <button class="color-btn green" onclick="setVersusColor('p2','green')">🟢 Green</button>
+            <button class="color-btn blue" onclick="setVersusColor('p2','blue')">🔵 Blue</button>
+            <button class="color-btn red" onclick="setVersusColor('p2','red')">🔴 Red</button>
+            <button class="color-btn yellow" onclick="setVersusColor('p2','yellow')">🟡 Yellow</button>
+          </div>
+        </div>
+        <button class="close-btn" onclick="confirmVersusSetupCrazy()">Start</button>
+      </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="game1v1.js"></script>
+  <script>
+    const defaultCfg = { p1:{name:'Player1', color:'green'}, p2:{name:'Player2', color:'blue'} };
+    let wins = {p1: 0, p2: 0};
+    
+    function setVersusColor(player, color){ 
+      window._versusConfig[player].color = color;
+      // Update active states
+      const container = player === 'p1' ? 'p1Colors' : 'p2Colors';
+      document.querySelectorAll('#' + container + ' .color-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector('#' + container + ' .color-btn.' + color).classList.add('active');
+    }
+    
+    function updateWins(winner) {
+      if(winner === 'p1') wins.p1++;
+      else if(winner === 'p2') wins.p2++;
+      document.getElementById('cP1Wins').innerText = wins.p1;
+      document.getElementById('cP2Wins').innerText = wins.p2;
+    }
+    
+    function confirmVersusSetupCrazy(){
+      const n1 = document.getElementById('nameP1').value.trim();
+      const n2 = document.getElementById('nameP2').value.trim();
+      if(n1) window._versusConfig.p1.name=n1;
+      if(n2) window._versusConfig.p2.name=n2;
+      localStorage.setItem('versusConfig', JSON.stringify(window._versusConfig));
+      document.getElementById('cP1Name').innerText = window._versusConfig.p1.name;
+      document.getElementById('cP2Name').innerText = window._versusConfig.p2.name;
+      wins = {p1: 0, p2: 0}; // Reset wins on new setup
+      document.getElementById('cP1Wins').innerText = '0';
+      document.getElementById('cP2Wins').innerText = '0';
+      startCrazyVersus(window._versusConfig);
+      document.getElementById('versusSetup').classList.add('hidden');
+    }
+    function openSetup(){ document.getElementById('versusSetup').classList.remove('hidden'); }
+    function preloadConfig(){
+      const saved = JSON.parse(localStorage.getItem('versusConfig')||'null');
+      window._versusConfig = saved || defaultCfg;
+      document.getElementById('cP1Name').innerText = window._versusConfig.p1.name;
+      document.getElementById('cP2Name').innerText = window._versusConfig.p2.name;
+      // Set active color buttons
+      setTimeout(() => {
+        setVersusColor('p1', window._versusConfig.p1.color);
+        setVersusColor('p2', window._versusConfig.p2.color);
+      }, 50);
+      openSetup();
+    }
+    document.getElementById('rematchCrazy').onclick = ()=>{
+      const cfg = JSON.parse(localStorage.getItem('versusConfig')||'null') || window._versusConfig || defaultCfg;
+      startCrazyVersus(cfg);
+    };
+    
+    // Check for tournament mode
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tournament') === 'true') {
+      const session = getCurrentSession();
+      if (session) {
+        // Use tournament player names and show setup for color selection
+        window._versusConfig = {
+          p1: {name: session.player1.name, color: 'green'},
+          p2: {name: session.player2.name, color: 'blue'}
+        };
+        // Pre-fill names in inputs and lock them
+        const nameP1Input = document.getElementById('nameP1');
+        const nameP2Input = document.getElementById('nameP2');
+        nameP1Input.value = session.player1.name;
+        nameP2Input.value = session.player2.name;
+        nameP1Input.disabled = true;
+        nameP2Input.disabled = true;
+        // Show setup menu for color selection
+        document.getElementById('versusSetup').classList.remove('hidden');
+        // Set active color buttons
+        setTimeout(() => {
+          setVersusColor('p1', 'green');
+          setVersusColor('p2', 'blue');
+        }, 50);
+      }
+    } else {
+      preloadConfig();
+    }
+  </script>
+</body>
+</html>

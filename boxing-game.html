@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🥊 Just Fight - The Way of Harmony</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="boxing-game.css" />
+  <script src="global-leaderboard.js"></script>
+</head>
+<body>
+  <div class="game-wrapper">
+    <div class="header">
+      <h1>🥊 Just Fight</h1>
+      <a class="settings-btn" href="index.html">🏠 Main Menu</a>
+    </div>
+
+    <div id="boxingSetup" class="settings-menu">
+      <div class="menu-content">
+        <h2>🥊 Fighter Selection</h2>
+        <div class="setting-section">
+          <h3>Player 1 (Left) - WASD</h3>
+          <div style="display:flex; gap:20px; justify-content:center; margin:10px 0;">
+            <div class="character-preview" data-player="p1" data-skin="1" onclick="selectSkin('p1', 1)">
+              <img src="./assets/boks/sprajt idle.gif" style="width:120px; height:140px;">
+              <p>Skin 1</p>
+            </div>
+            <div class="character-preview" data-player="p1" data-skin="2" onclick="selectSkin('p1', 2)">
+              <img src="./assets/boks/sprajt idle2.gif" style="width:120px; height:140px;">
+              <p>Skin 2</p>
+            </div>
+          </div>
+        </div>
+        <div class="setting-section">
+          <h3>Player 2 (Right) - Arrow Keys</h3>
+          <div style="display:flex; gap:20px; justify-content:center; margin:10px 0;">
+            <div class="character-preview" data-player="p2" data-skin="1" onclick="selectSkin('p2', 1)">
+              <img src="./assets/boks/sprajt idle kontra.gif" style="width:120px; height:140px;">
+              <p>Skin 1</p>
+            </div>
+            <div class="character-preview" data-player="p2" data-skin="2" onclick="selectSkin('p2', 2)">
+              <img src="./assets/boks/sprajt idle2 kontra.gif" style="width:120px; height:140px;">
+              <p>Skin 2</p>
+            </div>
+          </div>
+        </div>
+        <button class="control-btn" onclick="startBoxingGame()" style="margin-top:20px;">Start Fight!</button>
+      </div>
+    </div>
+
+    <div id="boxingGame" class="game-container hidden">
+      <h2 style="margin-bottom:15px; text-align:center; color:#fff; font-family:'Press Start 2P', monospace; text-shadow: 0 0 10px rgba(255,0,110,0.8);">Fight the Monster Together!</h2>
+      
+      <div class="info-panel" style="margin-bottom:15px;">
+        <div class="info-card">
+          <div class="info-label">Player 1 HP</div>
+          <div class="info-value" id="p1Health">100</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Player 2 HP</div>
+          <div class="info-value" id="p2Health">100</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Monster HP</div>
+          <div class="info-value" id="monsterHealth">500</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Score</div>
+          <div class="info-value" id="score">0</div>
+        </div>
+      </div>
+
+      <div class="game-canvas-wrapper">
+        <canvas id="boxingCanvas" width="800" height="400"></canvas>
+        <div class="player player1" id="player1Sprite"></div>
+        <div class="player player2" id="player2Sprite"></div>
+        <div class="monster" id="monsterSprite"></div>
+        <div id="gameOverlay" class="game-overlay"></div>
+      </div>
+      
+      <div class="legend" style="margin-top:15px;">
+        <h3>🎮 How to Play</h3>
+        <div class="mode-description">
+          <p><strong>Goal:</strong> Work together to defeat the monster! Match the arrows that appear above your head.</p>
+          <p><strong>Player 1 Controls:</strong> W (High Kick) | S (Low Kick) | A (Left Punch) | D (Right Punch)</p>
+          <p><strong>Player 2 Controls:</strong> ↑ (High Kick) | ↓ (Low Kick) | ← (Left Punch) | → (Right Punch)</p>
+          <p><strong>Rules:</strong> Hit the right button = 20 damage to monster. Miss = lose 20 HP. Both players must hit their buttons!</p>
+          <p><strong>Health:</strong> Players start with 100 HP, Monster has 500 HP</p>
+          <p style="text-align:center; margin-top:10px; font-weight:bold;">Press SPACE to start!</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+  </div>
+
+  <script src="boxing-game.js"></script>
+  <script>
+    let selectedSkins = {p1: 1, p2: 1};
+    
+    function selectSkin(player, skin) {
+      selectedSkins[player] = skin;
+      // Update active states
+      document.querySelectorAll(`[data-player="${player}"]`).forEach(el => {
+        el.classList.remove('active');
+      });
+      document.querySelector(`[data-player="${player}"][data-skin="${skin}"]`).classList.add('active');
+    }
+    
+    function startBoxingGame() {
+      window.boxingSkins = selectedSkins;
+      document.getElementById('boxingSetup').classList.add('hidden');
+      document.getElementById('boxingGame').classList.remove('hidden');
+    }
+    
+    // Set default selections
+    selectSkin('p1', 1);
+    selectSkin('p2', 1);
+    
+    // Tournament mode still shows character selection
+    // Players can choose skins before starting
+  </script>
+</body>
+</html>

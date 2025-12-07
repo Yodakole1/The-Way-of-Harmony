@@ -1,0 +1,119 @@
+/* Snake Game Specific Styles */
+
+.snake-canvas-wrapper {
+    position: relative;
+    width: 480px;
+    height: 480px;
+    margin: 0 auto;
+}
+
+#crazyCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#snakeSprites {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 480px;
+    height: 480px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.snake-segment {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: none; /* No CSS transition, using JS interpolation */
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Head sprites */
+.snake-head.green { background-image: url('./assets/zmijice/zelenazmijaglava.gif'); }
+.snake-head.blue { background-image: url('./assets/zmijice/plavazmijaglava.gif'); }
+.snake-head.red { background-image: url('./assets/zmijice/crvenazmijaglava.gif'); }
+.snake-head.yellow { background-image: url('./assets/zmijice/zutazmijaglava.gif'); }
+
+/* Body sprites */
+/* Image bodies (legacy) */
+.snake-body.green { background-image: url('./assets/zmijice/zelenazmijatelo.png'); }
+.snake-body.blue { background-image: url('./assets/zmijice/plavazmijatelo.png'); }
+.snake-body.red { background-image: url('./assets/zmijice/crvenazmijatelo.png'); }
+.snake-body.yellow { background-image: url('./assets/zmijice/zutazmijatelo.png'); }
+
+/* Corner sprite (G) — rotate-0/90/180/270 for 4 cases */
+.snake-corner.green { background-image: url('./assets/zmijice/zelenazmijaG.png'); }
+.snake-corner.blue { background-image: url('./assets/zmijice/plavazmijaG.png'); }
+.snake-corner.red { background-image: url('./assets/zmijice/crvenazmijaG.png'); }
+.snake-corner.yellow { background-image: url('./assets/zmijice/zutazmijaG.png'); }
+
+/* Drawn bodies (pattern stripes to avoid rotation issues) */
+.snake-body-drawn {
+    background-image: none !important;
+    border-radius: 4px;
+    background-size: auto !important;
+    background-position: 0 0 !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.65);
+    z-index: 2;
+}
+.snake-body-drawn.green {
+    background-color: #4caf50;
+    background-image: repeating-linear-gradient(135deg,
+        #388e3c 0px, #388e3c 8px,
+        #4caf50 8px, #4caf50 16px
+    );
+}
+.snake-body-drawn.blue {
+    background-color: #2196F3;
+    background-image: repeating-linear-gradient(135deg,
+        #1976D2 0px, #1976D2 8px,
+        #2196F3 8px, #2196F3 16px
+    );
+}
+.snake-body-drawn.red {
+    background-color: #F44336;
+    background-image: repeating-linear-gradient(135deg,
+        #D32F2F 0px, #D32F2F 8px,
+        #F44336 8px, #F44336 16px
+    );
+}
+.snake-body-drawn.yellow {
+    background-color: #FFEB3B;
+    background-image: repeating-linear-gradient(135deg,
+        #FBC02D 0px, #FBC02D 8px,
+        #FFEB3B 8px, #FFEB3B 16px
+    );
+}
+
+/* Corner sprites removed; using straight body only */
+
+/* Food sprites */
+.food-sprite {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+}
+
+.food-sprite.jabuka { background-image: url('./assets/zmijice/jabuka.gif'); }
+.food-sprite.banana { background-image: url('./assets/zmijice/banana.gif'); }
+.food-sprite.kruska { background-image: url('./assets/zmijice/kruska.gif'); }
+
+/* Rotation transforms */
+.rotate-0 { transform: rotate(0deg); }
+.rotate-90 { transform: rotate(90deg); }
+.rotate-180 { transform: rotate(180deg); }
+.rotate-270 { transform: rotate(270deg); }
+
+/* Flip transforms removed to simplify sprite usage */
