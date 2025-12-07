@@ -150,6 +150,15 @@ document.addEventListener('keydown', (e) => {
         setPlayerAnimation(1, 'rightPunch', true); 
       }
       
+      // Return to idle after attack animation completes
+      setTimeout(() => {
+        if (p1State === 'attacking') {
+          p1State = 'idle';
+          p1AnimationType = 'idle';
+          setPlayerAnimation(1, 'idle', true);
+        }
+      }, 1300);
+      
       if (!(p1MovingArrow && p1MovingArrow.arrived)) {
         // Missed - first show monster attack, then player injury
         setTimeout(() => {
@@ -215,6 +224,15 @@ document.addEventListener('keydown', (e) => {
         p2AnimationType = 'rightPunch'; 
         setPlayerAnimation(2, 'rightPunch', true); 
       }
+      
+      // Return to idle after attack animation completes
+      setTimeout(() => {
+        if (p2State === 'attacking') {
+          p2State = 'idle';
+          p2AnimationType = 'idle';
+          setPlayerAnimation(2, 'idle', true);
+        }
+      }, 1300);
       
       if (!(p2MovingArrow && p2MovingArrow.arrived)) {
         // Missed - first show monster attack, then player injury
