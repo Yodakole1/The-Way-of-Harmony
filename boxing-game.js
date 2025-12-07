@@ -54,71 +54,34 @@ function setPlayerAnimation(player, animation, immediate = false) {
   const skin = currentSkins[player === 1 ? 'p1' : 'p2'];
   const sprite = player === 1 ? player1Sprite : player2Sprite;
   
-  // Store current background image to check if it changed
-  const oldBg = sprite.style.backgroundImage;
-  
-  // Remove all classes and force immediate repaint
+  // Remove all classes first
   sprite.className = '';
-  sprite.style.backgroundImage = 'none';
-  sprite.style.display = 'none';
   
-  // Force multiple reflows for guaranteed restart
+  // Force reflow
+  void sprite.offsetWidth;
+  
+  // Apply new classes immediately
+  sprite.className = `player player${player} skin${skin} ${animation}`;
+  
+  // Force another reflow to ensure animation restarts
   void sprite.offsetWidth;
   void sprite.offsetHeight;
-  sprite.getBoundingClientRect();
-  
-  // Re-enable display
-  sprite.style.display = 'block';
-  
-  const applyClass = () => {
-    sprite.className = `player player${player} skin${skin} ${animation}`;
-    // Force background image reload by adding cache buster
-    sprite.style.backgroundImage = '';
-  };
-  
-  // Apply immediately or with requestAnimationFrame
-  if (immediate) {
-    applyClass();
-    void sprite.offsetHeight; // Force another reflow
-    // Additional forced reflow after short delay
-    setTimeout(() => {
-      void sprite.offsetHeight;
-    }, 10);
-  } else {
-    requestAnimationFrame(() => {
-      applyClass();
-      requestAnimationFrame(() => {
-        void sprite.offsetHeight;
-      });
-    });
-  }
 }
 
 // Helper function to set monster sprite animation
 function setMonsterAnimation(animation, immediate = false) {
-  // Remove all classes and force immediate repaint
+  // Remove all classes first
   monsterSprite.className = '';
-  monsterSprite.style.display = 'none';
   
-  // Force multiple reflows for guaranteed restart
+  // Force reflow
+  void monsterSprite.offsetWidth;
+  
+  // Apply new classes immediately
+  monsterSprite.className = `monster ${animation}`;
+  
+  // Force another reflow to ensure animation restarts
   void monsterSprite.offsetWidth;
   void monsterSprite.offsetHeight;
-  monsterSprite.getBoundingClientRect();
-  
-  // Re-enable display
-  monsterSprite.style.display = 'block';
-  
-  const applyClass = () => {
-    monsterSprite.className = `monster ${animation}`;
-  };
-  
-  // Apply immediately or with requestAnimationFrame
-  if (immediate) {
-    applyClass();
-    void monsterSprite.offsetHeight; // Force another reflow
-  } else {
-    requestAnimationFrame(applyClass);
-  }
 }
 
 // Arrow movement (come from sides)
