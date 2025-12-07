@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 The Way of Harmony - Main Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="global-leaderboard.js"></script>
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="header" style="margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <h1>🎮 The Way of Harmony</h1>
+            <button class="settings-btn" onclick="showLeaderboard()" style="cursor: pointer; border: none;">🏆 Leaderboard</button>
+        </div>
+        
+        <div class="game-container" style="max-width: 700px; margin: 0 auto;">
+            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                <button class="control-btn" onclick="startTournament()" style="border: none; cursor: pointer; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); font-size: 1.2rem; padding: 20px;">
+                    🏆 Start Tournament Mode
+                    <small style="display: block; font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Play all 3 games & compete for high score!</small>
+                </button>
+                <div style="border-top: 2px solid rgba(255,255,255,0.2); margin: 10px 0;"></div>
+                <a class="control-btn" href="dino-harmony.html" style="text-decoration: none; display: block; text-align: center; background: linear-gradient(135deg, #4caf50 0%, #2196F3 100%);">
+                    🎸 Game 1: Harmonic Flight
+                    <small style="display: block; font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Harmony & Disharmony</small>
+                </a>
+                <a class="control-btn" href="versus-crazy.html" style="text-decoration: none; display: block; text-align: center; background: linear-gradient(135deg, #F44336 0%, #E91E63 100%);">
+                    🐍 Game 2: Snake Battle
+                    <small style="display: block; font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Disharmony</small>
+                </a>
+                <a class="control-btn" href="boxing-game.html" style="text-decoration: none; display: block; text-align: center; background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);">
+                    🥊 Game 3: Just Fight
+                    <small style="display: block; font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Harmony Co-op</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="legend" style="max-width: 700px; margin: 20px auto 0;">
+            <h3>🎯 Game Descriptions</h3>
+            <div class="mode-description">
+                <p><strong>🎸 Harmonic Flight:</strong> Control two guitars simultaneously! 50% chance they need the same action (harmony) or opposite actions (disharmony). Top guitar: W/S, Bottom guitar: Up/Down arrows.</p>
+                <p><strong>🐍 Snake Battle:</strong> Two snakes on one board competing for food. Collision with opponent means defeat. Pure competitive chaos!</p>
+                <p><strong>🥊 Just Fight:</strong> Team up to defeat the monster! Match the arrows above your head. Both players must hit their buttons to deal damage. Miss = lose health!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tournament Setup Modal -->
+    <div id="tournamentSetup" class="settings-menu hidden">
+        <div class="menu-content">
+            <h2>🏆 Tournament Setup</h2>
+            <div class="setting-section">
+                <h3>Player 1 Name</h3>
+                <input type="text" class="text-input" id="p1TournamentName" placeholder="Enter Player 1 name" maxlength="20" />
+            </div>
+            <div class="setting-section">
+                <h3>Player 2 Name</h3>
+                <input type="text" class="text-input" id="p2TournamentName" placeholder="Enter Player 2 name" maxlength="20" />
+            </div>
+            <div style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 2px solid rgba(131,56,236,0.4); box-shadow: 0 0 20px rgba(255,0,110,0.2);">
+                <p style="margin: 0; text-align: center; line-height: 1.8; color: #ffffff; font-size: 14px;">
+                    <strong style="color:#ff006e; text-shadow: 0 0 10px rgba(255,0,110,0.8); font-size: 16px;">Tournament Mode:</strong><br/>
+                    <span style="color: rgba(255,255,255,0.95);">Play all 3 games in sequence.<br/>
+                    Your combined scores will be added to the global leaderboard!</span>
+                </p>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="control-btn" onclick="closeTournamentSetup()" style="flex: 1; background: linear-gradient(135deg, #555 0%, #333 100%); border: 2px solid rgba(255,255,255,0.2);">Cancel</button>
+                <button class="control-btn" onclick="beginTournament()" style="flex: 2;">Start Tournament!</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Global Leaderboard Modal -->
+    <div id="leaderboardModal" class="settings-menu hidden">
+        <div class="menu-content" style="max-width: 600px;">
+            <h2>🏆 Global Leaderboard</h2>
+            <div id="leaderboardContent" style="max-height: 400px; overflow-y: auto; margin: 20px 0;">
+                <!-- Populated by JavaScript -->
+            </div>
+            <button class="close-btn" onclick="closeLeaderboard()">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        function startTournament() {
+            document.getElementById('tournamentSetup').classList.remove('hidden');
+        }
+        
+        function closeTournamentSetup() {
+            document.getElementById('tournamentSetup').classList.add('hidden');
+        }
+        
+        function beginTournament() {
+            const p1Name = document.getElementById('p1TournamentName').value.trim() || 'Player 1';
+            const p2Name = document.getElementById('p2TournamentName').value.trim() || 'Player 2';
+            
+            // Start new session
+            startNewSession(p1Name, p2Name);
+            
+            // Redirect to first game
+            window.location.href = 'dino-harmony.html?tournament=true';
+        }
+        
+        // Auto-show leaderboard if returning from tournament
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('showLeaderboard') === 'true') {
+                setTimeout(() => {
+                    showLeaderboard();
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 500);
+            }
+        });
+        
+        function showLeaderboard() {
+            const leaderboard = getGlobalLeaderboard();
+            const content = document.getElementById('leaderboardContent');
+            
+            if (leaderboard.length === 0) {
+                content.innerHTML = '<p style="text-align: center; color: #aaa; padding: 40px;">No tournament results yet. Start a tournament to compete!</p>';
+            } else {
+                let html = '<table class="leaderboard-table" style="width: 100%;"><thead><tr><th>Rank</th><th>Players</th><th>Flight</th><th>Snake</th><th>Fight</th><th>Total</th><th>Time</th></tr></thead><tbody>';
+                
+                leaderboard.forEach((entry, index) => {
+                    const totalScore = entry.player1Total + entry.player2Total;
+                    const date = new Date(entry.date).toLocaleDateString();
+                    html += `<tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${entry.player1}</strong> & <strong>${entry.player2}</strong></td>
+                        <td>${entry.scores.dino.p1 + entry.scores.dino.p2}</td>
+                        <td>${entry.scores.snake.p1 + entry.scores.snake.p2}</td>
+                        <td>${entry.scores.boxing.p1 + entry.scores.boxing.p2}</td>
+                        <td style="color: #FFD700; font-weight: bold;">${totalScore}</td>
+                        <td>${formatTime(entry.duration)}</td>
+                    </tr>`;
+                });
+                
+                html += '</tbody></table>';
+                content.innerHTML = html;
+            }
+            
+            document.getElementById('leaderboardModal').classList.remove('hidden');
+        }
+        
+        function closeLeaderboard() {
+            document.getElementById('leaderboardModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
