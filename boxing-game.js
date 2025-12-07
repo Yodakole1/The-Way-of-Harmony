@@ -12,6 +12,8 @@ backgroundImage.src = 'assets/boks/boxpozadina.png';
 // Load sound effects
 const hitSound = new Audio('assets/soundeffectovi/hithurt.wav');
 hitSound.volume = 0.3;
+const deathSound = new Audio('assets/soundeffectovi/explosion-death-dino.wav');
+deathSound.volume = 0.4;
 
 // Get sprite elements
 const player1Sprite = document.getElementById('player1Sprite');
@@ -101,6 +103,12 @@ let moveInterval = 200; // frames between new moves (increased from 150 for slow
 // Input handling
 let keys = {};
 document.addEventListener('keydown', (e) => {
+  // Don't process any keys if setup menu is visible
+  const setupMenu = document.getElementById('boxingSetup');
+  if (setupMenu && !setupMenu.classList.contains('hidden')) {
+    return;
+  }
+  
   // Prevent default behavior for arrow keys and space to stop page scrolling
   if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
     e.preventDefault();
@@ -128,24 +136,24 @@ document.addEventListener('keydown', (e) => {
   keys[e.key] = true;
   
   // Player 1 controls (WASD)
-  if (!p1Hit && p1CurrentMove && (e.key === 'w' || e.key === 'a' || e.key === 's' || e.key === 'd')) {
-    if (e.key === p1CurrentMove) {
+  if (!p1Hit && p1CurrentMove && (e.key === 'w' || e.key === 'W' || e.key === 'a' || e.key === 'A' || e.key === 's' || e.key === 'S' || e.key === 'd' || e.key === 'D')) {
+    if (e.key === p1CurrentMove || e.key === p1CurrentMove.toUpperCase()) {
       p1Hit = true;
       p1State = 'attacking';
       // Set animation type based on key and store it - PLAY IMMEDIATELY
-      if (e.key === 'w') { 
+      if (e.key === 'w' || e.key === 'W') { 
         p1AnimationType = 'highkick'; 
         setPlayerAnimation(1, 'highkick', true); 
       }
-      else if (e.key === 's') { 
+      else if (e.key === 's' || e.key === 'S') { 
         p1AnimationType = 'lowkick'; 
         setPlayerAnimation(1, 'lowkick', true); 
       }
-      else if (e.key === 'a') { 
+      else if (e.key === 'a' || e.key === 'A') { 
         p1AnimationType = 'leftPunch'; 
         setPlayerAnimation(1, 'leftPunch', true); 
       }
-      else if (e.key === 'd') { 
+      else if (e.key === 'd' || e.key === 'D') { 
         p1AnimationType = 'rightPunch'; 
         setPlayerAnimation(1, 'rightPunch', true); 
       }
@@ -423,6 +431,8 @@ function checkGameOver() {
   if (p1Health <= 0 || p2Health <= 0) {
     gameRunning = false;
     // Keep gameStarted = true so sprites stay visible
+    deathSound.currentTime = 0;
+    deathSound.play().catch(e => {});
     monsterState = 'laugh';
     setMonsterAnimation('laugh', true);
     

@@ -20,6 +20,8 @@
   // Sound effects
   const powerupSound = new Audio('assets/soundeffectovi/powerup.wav');
   powerupSound.volume = 0.3;
+  const deathSound = new Audio('assets/soundeffectovi/explosion-death-dino.wav');
+  deathSound.volume = 0.4;
   const foodImages = {};
   const snakeImages = {};
 
@@ -320,7 +322,9 @@
         const h1={x:s1[0].x+d1.x,y:s1[0].y+d1.y};
         
         if(collideWalls(h1)||collideSelf(s1,h1)||collideOther(s2,h1)){ 
-          alive1=false; 
+          alive1=false;
+          deathSound.currentTime = 0;
+          deathSound.play().catch(e => {}); 
         } else {
           h1.visualX = s1[0].visualX;
           h1.visualY = s1[0].visualY;
@@ -364,7 +368,9 @@
         const h2={x:s2[0].x+d2.x,y:s2[0].y+d2.y};
         
         if(collideWalls(h2)||collideSelf(s2,h2)||collideOther(s1,h2)){ 
-          alive2=false; 
+          alive2=false;
+          deathSound.currentTime = 0;
+          deathSound.play().catch(e => {}); 
         } else {
           h2.visualX = s2[0].visualX;
           h2.visualY = s2[0].visualY;
@@ -522,11 +528,11 @@
         return; 
       }
       if(isPaused || !gameStarted) return; // Block keys until game starts
-      if(['w','a','s','d'].includes(k)) e.preventDefault();
-      if(k==='w' && d1.y!==1) d1={x:0,y:-1};
-      if(k==='a' && d1.x!==1) d1={x:-1,y:0};
-      if(k==='s' && d1.y!==-1) d1={x:0,y:1};
-      if(k==='d' && d1.x!==-1) d1={x:1,y:0};
+      if(['w','W','a','A','s','S','d','D'].includes(k)) e.preventDefault();
+      if((k==='w'||k==='W') && d1.y!==1) d1={x:0,y:-1};
+      if((k==='a'||k==='A') && d1.x!==1) d1={x:-1,y:0};
+      if((k==='s'||k==='S') && d1.y!==-1) d1={x:0,y:1};
+      if((k==='d'||k==='D') && d1.x!==-1) d1={x:1,y:0};
       // Arrow keys for Player 2
       if(['ArrowUp','ArrowLeft','ArrowDown','ArrowRight'].includes(k)) e.preventDefault();
       if(k==='ArrowUp' && d2.y!==1) d2={x:0,y:-1};

@@ -23,6 +23,8 @@ const backgroundSpeed = 0.5; // pixels per frame (slower)
 // Load sound effects
 const jumpSound = new Audio('assets/soundeffectovi/jump.wav');
 jumpSound.volume = 0.3;
+const deathSound = new Audio('assets/soundeffectovi/explosion-death-dino.wav');
+deathSound.volume = 0.4;
 
 // Game constants
 const CANVAS_WIDTH = 800;
@@ -392,6 +394,9 @@ function checkCollision(dino, obstacles) {
 
 function gameOver() {
   gameRunning = false;
+  
+  deathSound.currentTime = 0;
+  deathSound.play().catch(e => {});
   
   const displayScore = Math.floor(score / 20); // match the slower score calculation
   if (displayScore > highScore) {

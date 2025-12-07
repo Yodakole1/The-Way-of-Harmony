@@ -399,6 +399,16 @@ canvas:hover {
     overflow-y: auto;
 }
 
+/* Hide scrollbar for menu content */
+.menu-content::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .game-container h2 {
     color: #fff;
     font-family: 'Press Start 2P', monospace;
