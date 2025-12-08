@@ -42,20 +42,7 @@
 .snake-head.red { background-image: url('./assets/zmijice/crvenazmijaglava.gif'); }
 .snake-head.yellow { background-image: url('./assets/zmijice/zutazmijaglava.gif'); }
 
-/* Body sprites */
-/* Image bodies (legacy) */
-.snake-body.green { background-image: url('./assets/zmijice/zelenazmijatelo.png'); }
-.snake-body.blue { background-image: url('./assets/zmijice/plavazmijatelo.png'); }
-.snake-body.red { background-image: url('./assets/zmijice/crvenazmijatelo.png'); }
-.snake-body.yellow { background-image: url('./assets/zmijice/zutazmijatelo.png'); }
-
-/* Corner sprite (G) — rotate-0/90/180/270 for 4 cases */
-.snake-corner.green { background-image: url('./assets/zmijice/zelenazmijaG.png'); }
-.snake-corner.blue { background-image: url('./assets/zmijice/plavazmijaG.png'); }
-.snake-corner.red { background-image: url('./assets/zmijice/crvenazmijaG.png'); }
-.snake-corner.yellow { background-image: url('./assets/zmijice/zutazmijaG.png'); }
-
-/* Drawn bodies (pattern stripes to avoid rotation issues) */
+/* Drawn bodies (pattern stripes) */
 .snake-body-drawn {
     background-image: none !important;
     border-radius: 4px;
@@ -109,11 +96,3 @@
 .food-sprite.jabuka { background-image: url('./assets/zmijice/jabuka.gif'); }
 .food-sprite.banana { background-image: url('./assets/zmijice/banana.gif'); }
 .food-sprite.kruska { background-image: url('./assets/zmijice/kruska.gif'); }
-
-/* Rotation transforms */
-.rotate-0 { transform: rotate(0deg); }
-.rotate-90 { transform: rotate(90deg); }
-.rotate-180 { transform: rotate(180deg); }
-.rotate-270 { transform: rotate(270deg); }
-
-/* Flip transforms removed to simplify sprite usage */
