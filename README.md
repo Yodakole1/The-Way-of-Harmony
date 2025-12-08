@@ -10,7 +10,7 @@ A collection of three cooperative/competitive two-player games exploring the con
 
 **JavaScript Development:**
 - [Yodakole1](https://github.com/Yodakole1)
-- Sarik
+- [Sarik](https://github.com/Sarik47)
 
 **Assets & Sound Design:**
 - [pijera](https://github.com/pijera)
@@ -19,6 +19,9 @@ A collection of three cooperative/competitive two-player games exploring the con
 ## 🎯 Game Concepts
 
 ### 🎸 Harmonic Flight - *Harmony vs Disharmony*
+
+![Harmonic Flight](for-readme/harmonic-flight-screenshot.png)
+
 Experience the dynamic shift between harmony and disharmony! Control two musical instruments simultaneously as the game randomly switches between two modes:
 
 - **🟢 Harmony Mode (50% chance):** Both instruments need the SAME action - jump together or crouch together
@@ -34,6 +37,9 @@ Experience the dynamic shift between harmony and disharmony! Control two musical
 ---
 
 ### 🐍 Snake Battle - *Pure Disharmony*
+
+![Snake Battle](for-readme/snake-battle-screenshot.png)
+
 Classic snake chaos with two players fighting on one board! This is pure competition - no cooperation here.
 
 - Eat food to grow longer and score points
@@ -52,6 +58,9 @@ Classic snake chaos with two players fighting on one board! This is pure competi
 ---
 
 ### 🥊 Just Fight - *Pure Harmony*
+
+![Just Fight](for-readme/just-fight-screenshot.png)
+
 Team up to defeat the monster! This is all about cooperation and timing.
 
 - Arrows appear above each player's head showing required moves
@@ -77,6 +86,9 @@ Team up to defeat the monster! This is all about cooperation and timing.
 5. Work together or compete to win!
 
 ### Tournament Mode
+
+![Leaderboard](for-readme/leaderboard-screenshot.png)
+
 Play all three games in sequence and compete for the highest combined score on the global leaderboard!
 
 ## 🛠️ Technical Details
