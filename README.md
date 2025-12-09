@@ -4,6 +4,8 @@
 
 A collection of three cooperative/competitive two-player games exploring the concepts of harmony and disharmony in gameplay mechanics.
 
+## 🎮 [Play Now!](https://yodakole1.github.io/The-Way-of-Harmony/index.html)
+
 ![Main Menu](for-readme/main-menu-screenshot.png)
 
 ## 🏆 Team
